@@ -2,7 +2,7 @@ module BookKeeping
   VERSION = 0 # Where the version number matches the one in the test.
 end
 
-class BookStore
+module BookStore
   BOOK_PRICE = 8
   DISCOUNTED_RATES = [0.75, 0.80, 0.9, 0.95, 1].freeze
   DIFFERENT_BOOKS = 5
@@ -44,19 +44,14 @@ class BookStore
     books_left
   end
 
-  def self.set_available(books, number)
-    count = 0
-    books.each do |num_left|
-      count += 1 if num_left > 0
-    end
-    count >= number
+  def self.set_available(books, set_size)
+    books.count { |book| book > 0 } >= set_size
   end
 
   def self.num_sets(books, set_size)
-    books_left = books.clone
     count = 0
-    while set_available(books_left, set_size)
-      books_left = remove_set(books_left, set_size)
+    while set_available(books, set_size)
+      books = remove_set(books, set_size)
       count += 1
     end
     count

@@ -2,7 +2,7 @@ module BookKeeping
   VERSION = 3
 end
 
-class Hamming
+module Hamming
   def self.compute(strand_a, strand_b)
     if strand_a.length != strand_b.length
       raise ArgumentError, 'Strings must be of equal length'
