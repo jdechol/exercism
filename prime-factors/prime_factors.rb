@@ -1,30 +1,37 @@
 class PrimeFactors
-  def self.for(number)
-    data = self.remove_factors_of(2, number)
-    number = data[:number]
-    factors = data[:factors]
+  def initialize(number)
+    @number = number
+    @factors = []
+  end
 
-    square_root =  [Math.sqrt(number).to_i, 3].max
+  def self.for(num)
+    PrimeFactors.new(num).all_factors
+  end
 
-    3.step(square_root, 2) do |index|
-      data = self.remove_factors_of(index, number)
-      number = data[:number]
-      factors = factors.concat(data[:factors])
+  def all_factors
+    collect_all(2)
+    root =  Math.sqrt(number)
+
+    3.step(root, 2) do |index|
+      collect_all(index)
     end
 
     factors.push(number) if number > 2
-
     factors
   end
 
-  def self.remove_factors_of(factor, number)
-    factors = []
+  private
 
-    while number % factor == 0
+  def collect_all(factor)
+    while divisible_by(factor)
       factors.push(factor)
-      number /= factor
+      @number /= factor
     end
-
-    { number: number, factors: factors }
   end
+
+  def divisible_by(factor)
+    number % factor == 0
+  end
+
+  attr_reader :number, :factors
 end
