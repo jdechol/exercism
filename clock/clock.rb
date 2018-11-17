@@ -4,6 +4,10 @@ class Clock
     @minutes = calculate_minutes(minutes)
   end
 
+  def self.at(hours, minutes)
+    Clock.new(hours, minutes)
+  end
+
   def +(addend_in_minutes)
     Clock.new(
       calculate_hours(@hours, @minutes + addend_in_minutes),
@@ -30,10 +34,6 @@ class Clock
 
   def calculate_minutes(minutes)
     minutes % 60
-  end
-
-  def self.at(hours, minutes)
-    Clock.new(hours, minutes)
   end
 
   def format_two_digits(num)
