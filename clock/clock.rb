@@ -20,9 +20,7 @@ class Clock
   end
 
   def to_s
-    hours_string = format_two_digits(@hours)
-    minutes_string = format_two_digits(@minutes)
-    "#{hours_string}:#{minutes_string}"
+    format('%02d:%02d', @hours, @minutes)
   end
 
   private
@@ -34,12 +32,6 @@ class Clock
 
   def calculate_minutes(minutes)
     minutes % 60
-  end
-
-  def format_two_digits(num)
-    return "00" if num == 0
-
-    num < 10 ? "0#{num}" : "#{num}"
   end
 end
 
