@@ -15,9 +15,6 @@ class HighScores
   end
 
   def personal_top_three
-    sorted_scores ||= scores.sort
-    sorted_scores.reverse.take 3
+    scores.max(3)
   end
-
-  attr_reader :sorted_scores
 end
