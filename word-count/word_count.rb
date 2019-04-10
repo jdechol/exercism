@@ -1,19 +1,19 @@
 class Phrase
-  def initialize(sentence)
-    @sentence = sentence
+  def initialize(phrase)
+    @phrase = phrase
   end
 
   def word_count
-    words_in(sentence).each_with_object(Hash.new(0)) do |word, counts|
+    words_in(phrase).each_with_object(Hash.new(0)) do |word, counts|
       counts[word.downcase] += 1
     end
   end
 
   private
 
-  def words_in(sentence)
-    sentence.strip.scan(/\b['\w]+\b/)
+  def words_in(phrase)
+    phrase.strip.scan(/\b['\w]+\b/)
   end
 
-  attr_reader :sentence
+  attr_reader :phrase
 end
